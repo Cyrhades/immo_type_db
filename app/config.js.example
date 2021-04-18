@@ -1,0 +1,20 @@
+module.exports = {
+    websiteName: 'NOM DU SITE IMMO',
+    port : 3000,
+    /*
+    type_db: 'mongodb',
+    db : {
+        cluster: '',
+        user : '',
+        pwd: '',
+        dbname: ''
+    }*/
+    type_db: 'mysql',
+    db : {
+        host     : '',
+        user     : '',
+        password : '',
+        port     : 3306,
+        database : ''
+    }
+};
