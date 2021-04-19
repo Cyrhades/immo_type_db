@@ -34,8 +34,8 @@ module.exports = class User {
                    resolve(true);
                 }  
                 resolve(false);
-            })
-        })
+            });
+        });
     }
 
     getUserByEmail(email) {
@@ -45,8 +45,8 @@ module.exports = class User {
                 if (!err && user !== null) {
                    resolve(user);
                 }  
-                resolve(false);
+                reject(false);
             });
-        })
+        });
     }
 } 
