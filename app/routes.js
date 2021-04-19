@@ -1,37 +1,15 @@
+let loader = require('./getFiles.js');
 module.exports = (app) => {
 
-    app.get('/', (req, res) => {
-        let Home = require('../src/controllers/Home.js');
-        (new Home()).print(req, res);
-    });
+    app.get('/', loader().controller('Home').print);
     
-    app.get('/inscription', (req, res) => {
-        let Register = require('../src/controllers/Register.js');
-        (new Register()).printForm(req, res);
-    });
+    app.get('/inscription', loader().controller('Register').printForm);
+    app.post('/inscription', loader().controller('Register').processForm);
+   
+    app.get('/connexion', loader().controller('Authenticated').printForm);
+    app.post('/connexion', loader().controller('Authenticated').processForm);
 
-    app.post('/inscription', (req, res) => {
-        let Register = require('../src/controllers/Register.js');
-        (new Register()).processForm(req, res);
-    });
+    app.get('/deconnexion', loader().controller('Authenticated').disconnect);
 
-    app.get('/connexion', (req, res) => {
-        let Authenticated = require('../src/controllers/Authenticated.js');
-        (new Authenticated()).printForm(req, res);
-    });
-
-    app.post('/connexion', (req, res) => {
-        let Authenticated = require('../src/controllers/Authenticated.js');
-        (new Authenticated()).processForm(req, res);
-    });
-
-    app.get('/deconnexion', (req, res) => {
-        let Authenticated = require('../src/controllers/Authenticated.js');
-        (new Authenticated()).disconnect(req, res);
-    });
-
-    app.get('/admin', (req, res) => {
-        let Dashboard = require('../src/controllers/Dashboard.js');
-        (new Dashboard()).print(req, res);
-    });
+    app.get('/admin', loader().controller('Dashboard').print);
 };
