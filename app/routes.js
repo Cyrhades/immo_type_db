@@ -24,6 +24,19 @@ module.exports = (app) => {
         .get(loader().controller('Dashboard').print)
         .all(errorsHTTP.error405);
 
-    // Erreur 404
+    app.route("/admin/realty")
+        .get(loader().controller('Realty').print)
+        .all(errorsHTTP.error405);
+
+    app.route("/admin/realty/add")
+        .get(loader().controller('Realty').printForm)
+        .post(loader().controller('Realty').processForm)
+        .all(errorsHTTP.error405);
+    
+    app.route("/admin/realty/delete/:id")
+        .get(loader().controller('Realty').delete)
+        .all(errorsHTTP.error405);    
+    
+    // Erreur 404 (doit être en derniere)
     app.route("*").all(errorsHTTP.error404);
 };

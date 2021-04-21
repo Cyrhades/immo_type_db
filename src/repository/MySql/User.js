@@ -24,7 +24,7 @@ module.exports = class User {
 
     emailExists(email) {
         return new Promise((resolve, reject) => {
-            this.db.query('SELECT count(id) AS count FROM users WHERE ?', {email}, function (error, results, fields) {
+            this.db.query('SELECT count(id) AS count FROM users WHERE email=?', {email}, function (error, results, fields) {
                 if (error) { reject(error.message);}
                 // n'existe pas
                 if(results[0].count == 0) resolve(false);
@@ -36,8 +36,8 @@ module.exports = class User {
 
     getUserByEmail(email) {
         return new Promise((resolve, reject) => {
-            this.db.query('SELECT * FROM users WHERE ?', {email}, function (error, results, fields) {
-                if (error) { reject(error.message);}
+            this.db.query('SELECT * FROM users WHERE email=?', email, function (error, results, fields) {
+                if (error || results.length == 0) { reject();}
                 else resolve(results[0]);
             });
         });
